@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    tools:context=".ManHinhDangKy">
+
+    <EditText
+        android:id="@+id/DangKy_Username_editText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/lamtron_edittext"
+        android:ems="10"
+        android:hint="Username"
+
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="#9e9e9e"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DangKy_ThemAnh_Button" />
+
+    <EditText
+        android:id="@+id/DangKy_Email_EditText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/lamtron_edittext"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        android:textColorHint="#9e9e9e"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="@+id/DangKy_Username_editText"
+        app:layout_constraintStart_toStartOf="@+id/DangKy_Username_editText"
+        app:layout_constraintTop_toBottomOf="@+id/DangKy_Username_editText" />
+
+    <EditText
+        android:id="@+id/DangKy_Password_EditText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/lamtron_edittext"
+        android:ems="10"
+        android:hint="Password"
+        android:textColorHint="#9e9e9e"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="@+id/DangKy_Email_EditText"
+        app:layout_constraintStart_toStartOf="@+id/DangKy_Email_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/DangKy_Email_EditText" />
+
+    <Button
+        android:id="@+id/DangKy_Button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Create Account"
+        android:textColor="@android:color/black"
+        android:background="@drawable/lamtron_button"
+        app:layout_constraintEnd_toEndOf="@+id/DangKy_Password_EditText"
+        app:layout_constraintStart_toStartOf="@+id/DangKy_Password_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/DangKy_Password_EditText" />
+
+    <TextView
+        android:id="@+id/DangKy_SignIn_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginBottom="24dp"
+        android:text="You have an account yet? Sign In"
+        android:textColor="#F29DBB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/DangKy_ThemAnh_Button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/plusphoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/DangKy_ImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:civ_border_width="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/DangKy_ThemAnh_Button"
+        app:layout_constraintEnd_toEndOf="@+id/DangKy_ThemAnh_Button"
+        app:layout_constraintStart_toStartOf="@+id/DangKy_ThemAnh_Button"
+        app:layout_constraintTop_toTopOf="@+id/DangKy_ThemAnh_Button"
+         />
+</androidx.constraintlayout.widget.ConstraintLayout>
