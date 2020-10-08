@@ -1,4 +1,4 @@
-package com.example.socialproject
+package com.example.socialproject.DangNhapDangKy
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,9 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.socialproject.ManHinhHome.ManHinhBase
 import com.example.socialproject.Model.User
+import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -136,10 +138,6 @@ class ManHinhDangKy : AppCompatActivity() {
 
     }
 
-    class Following(val uid: String) {
-        constructor(): this("")
-    }
-
     fun setUpFollowing() {
         val uid = FirebaseAuth.getInstance().uid
         val value = HashMap<String, Any?>()
@@ -149,6 +147,12 @@ class ManHinhDangKy : AppCompatActivity() {
         ref.setValue(value)
             .addOnSuccessListener {
                 Log.d(TAG, "Tài khoản đã follow chính mình")
+
+                val intent = Intent(this, ManHinhBase::class.java)
+                // Khi đăng kí/đăng nhập xong thì lúc ấn nút back không trở về màn hình đăng nhập/ đăng kí được
+                // Cũng như khi khởi động lại ứng dụng sẽ vào luôn màn hình Home
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.d(TAG, "Follow thất bại")

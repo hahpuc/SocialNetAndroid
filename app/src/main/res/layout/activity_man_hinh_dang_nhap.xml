@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#212121"
-    tools:context=".ManHinhDangNhap">
+    tools:context=".DangNhapDangKy.ManHinhDangNhap">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -30,6 +30,7 @@
         android:ems="10"
         android:hint="Email"
         android:paddingLeft="16dp"
+        android:textColor="@android:color/white"
         android:textColorHint="#9e9e9e"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +49,7 @@
         android:background="@drawable/lamtron_edittext"
         android:ems="10"
         android:hint="Password"
+        android:textColor="@android:color/white"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
         android:textColorHint="#9e9e9e"
