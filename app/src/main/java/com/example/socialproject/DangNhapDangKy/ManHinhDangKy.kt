@@ -9,7 +9,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.socialproject.ManHinhHome.ManHinhBase
+import com.example.socialproject.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth

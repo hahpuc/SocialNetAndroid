@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryDark">#000000</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#F29DBB</item>
     </style>
 
     <style name="CustomTabStyle" parent="TextAppearance.Design.Tab">

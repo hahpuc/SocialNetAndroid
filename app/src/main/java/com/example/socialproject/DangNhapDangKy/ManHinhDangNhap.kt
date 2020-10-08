@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.socialproject.ManHinhHome.ManHinhBase
+import com.example.socialproject.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_man_hinh_dang_nhap.*

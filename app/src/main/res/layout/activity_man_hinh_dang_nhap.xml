@@ -10,12 +10,12 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:background="@drawable/logoname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logoname" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/DangNhap_Email_EditText"
