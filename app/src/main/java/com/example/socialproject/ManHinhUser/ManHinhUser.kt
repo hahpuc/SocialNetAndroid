@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialproject.Model.Status
 import com.example.socialproject.R
+import com.example.socialproject.VerticalSpaceItemDecoration
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -50,7 +51,9 @@ class ManHinhUser : Fragment() {
                 1 -> R.drawable.ic_baseline_account_circle_24
                 else -> R.drawable.ic_baseline_airline_seat_flat_24
             }*/
-            val item = Status("")
+
+            // Fetch Data
+            val item = Status("User name")
             list += item
         }
         return list
@@ -64,10 +67,12 @@ class ManHinhUser : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_man_hinh_user, container, false)
         val rec = view.findViewById(R.id.user_recycler_view) as RecyclerView
-
         val statusList = generateDummyList(5)
+
         rec.adapter = ManHinhUserAdapter(statusList)
         rec.setHasFixedSize(true)
+        rec.addItemDecoration(VerticalSpaceItemDecoration(10))
+
         return view
     }
 

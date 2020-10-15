@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#212121"
     tools:context=".ManHinhUser.ManHinhUser">
 
 
@@ -13,7 +14,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/user_item_row"
+        tools:listitem="@layout/user_status_item_row"
         />
 </RelativeLayout>
 
