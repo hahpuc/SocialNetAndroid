@@ -1,11 +1,20 @@
 package com.example.socialproject.ManHinhUser
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.menu.MenuView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.socialproject.Model.Status
 import com.example.socialproject.R
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.fragment_man_hinh_user.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ManHinhUser.newInstance] factory method to
  * create an instance of this fragment.
  */
+ 
 class ManHinhUser : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -28,6 +38,22 @@ class ManHinhUser : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+    }
+
+    private fun generateDummyList(size: Int): List<Status> {
+        val list = ArrayList<Status>()
+
+        for (i in 0 until size) {
+            /*val drawable = when (i % 3) {
+                0 -> R.drawable.ic_android_black_24dp
+                1 -> R.drawable.ic_baseline_account_circle_24
+                else -> R.drawable.ic_baseline_airline_seat_flat_24
+            }*/
+            val item = Status("")
+            list += item
+        }
+        return list
     }
 
     override fun onCreateView(
@@ -35,7 +61,14 @@ class ManHinhUser : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_man_hinh_user, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_man_hinh_user, container, false)
+        val rec = view.findViewById(R.id.user_recycler_view) as RecyclerView
+
+        val statusList = generateDummyList(5)
+        rec.adapter = ManHinhUserAdapter(statusList)
+        rec.setHasFixedSize(true)
+        return view
     }
 
     companion object {
@@ -58,3 +91,4 @@ class ManHinhUser : Fragment() {
             }
     }
 }
+
