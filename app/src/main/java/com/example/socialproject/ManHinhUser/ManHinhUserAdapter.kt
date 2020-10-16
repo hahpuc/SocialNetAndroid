@@ -31,10 +31,12 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
         val TAG = "ManHinhUser"
 
         val CURRENT_USER = "CURRENT_USER"
+
+
     }
 
     // Tài khoản đang đăng nhập
-     var currentUser: User? = null
+    var currentUser: User? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -105,6 +107,7 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
 }
 
 class userHeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
     val following = itemView.findViewById(R.id.followingCountTextView) as? TextView
     val follower = itemView.findViewById(R.id.followerCountTextView) as? TextView
     val username = itemView.findViewById(R.id.user_user_name) as? TextView
