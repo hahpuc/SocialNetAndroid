@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ManHinhUser.EditProfile"></activity>
         <activity android:name=".ManHinhCoSo.ManHinhBase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DangNhapDangKy.ManHinhDangNhap" />
-        <activity android:name=".DangNhapDangKy.ManHinhDangKy">
-
-        </activity>
+        <activity android:name=".DangNhapDangKy.ManHinhDangKy"></activity>
     </application>
 
 </manifest>
