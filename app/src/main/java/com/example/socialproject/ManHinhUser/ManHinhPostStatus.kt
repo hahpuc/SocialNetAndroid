@@ -12,10 +12,15 @@ import androidx.annotation.RequiresApi
 import com.example.socialproject.DangNhapDangKy.ManHinhDangKy
 import com.example.socialproject.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.Model.Status
+import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_man_hinh_post_status.*
 import java.time.LocalDateTime
@@ -47,6 +52,7 @@ class ManHinhPostStatus : AppCompatActivity() {
 
         // Post status
         post_post_status_button.setOnClickListener {
+            Log.d(TAG, "Tiến hành đăng status")
             uploadImageToFirebase()
         }
     }
@@ -78,11 +84,11 @@ class ManHinhPostStatus : AppCompatActivity() {
     fun saveStatusToFirebase(statusImageUrl: String) {
 
         val userID = FirebaseAuth.getInstance().uid
+
         val ref = FirebaseDatabase.getInstance().getReference("Status/$userID").push()
-
         val currentDateTime = LocalDateTime.now().toString()
-        val statusPost = Status(ref.key!!, statusImageUrl, post_edit_text.text.toString(), currentDateTime)
 
+        val statusPost = Status(ref.key!!, userID.toString(), statusImageUrl, post_edit_text.text.toString(), currentDateTime)
         ref.setValue(statusPost)
             .addOnSuccessListener {
                 Log.d(TAG, "Đăng status thành công")

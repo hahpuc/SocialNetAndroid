@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 
 class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -84,10 +85,27 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
         }
         else
         if (holder is statusViewHolder) {
-            //holder.label?.text = statusList[position - 1].getTextString()
+
+            // Lấy data từ Firebase
+            val uid = FirebaseAuth.getInstance().uid
+            val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    currentUser = snapshot.getValue(User::class.java)
+                    //Log.d(TAG, "Data current user: ${currentUser}")
+
+                    holder.username?.text = currentUser?.username
+                    Picasso.get().load(currentUser?.profileImageUrl).into(holder.userAvatar)
+                }
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+
             holder.statusTextView?.text = statusList[position - 1].caption
             Picasso.get().load(statusList[position - 1].imageUrl).into(holder.statusImage)
-
 
         }
     }
@@ -128,6 +146,8 @@ class userHeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 }
 
 class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
-    val statusImage = itemView.findViewById(R.id.status_image_view) as ImageView
+    val statusImage = itemView.findViewById(R.id.status_image_view) as? ImageView
     val statusTextView = itemView.findViewById(R.id.status_status_text_view) as? TextView
+    val userAvatar = itemView.findViewById(R.id.status_profile_imageview) as? ImageView
+    val username = itemView.findViewById(R.id.status_user_name) as? TextView
 }
