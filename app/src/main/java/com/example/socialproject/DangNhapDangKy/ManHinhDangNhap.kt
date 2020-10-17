@@ -44,7 +44,7 @@ class ManHinhDangNhap : AppCompatActivity() {
                 // Khi đăng kí/đăng nhập xong thì lúc ấn nút back không trở về màn hình đăng nhập/ đăng kí được
                 // Cũng như khi khởi động lại ứng dụng sẽ vào luôn màn hình Home
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                //intent.putExtra(CURRENT_USER, it.user)
+                intent.putExtra(CURRENT_USER, it.user)
                 startActivity(intent)
             }
             .addOnFailureListener {

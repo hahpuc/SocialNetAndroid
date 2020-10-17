@@ -1,12 +1,11 @@
 package com.example.socialproject.Model
 
-class Status(val text: String) {
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.LocalDateTime
+import java.util.*
 
-    public fun getTextString(): String {
-        return text;
-    }
-
-    constructor() : this("")
-
-
+class Status(val id: String, val imageUrl: String, val caption: String, val createtionDate: String) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    constructor() : this("", "","", "")
 }

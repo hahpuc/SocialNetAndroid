@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import com.example.socialproject.DangNhapDangKy.ManHinhDangKy
 import com.example.socialproject.DangNhapDangKy.ManHinhDangNhap
+import com.example.socialproject.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +28,6 @@ class EditProfile : AppCompatActivity() {
 
     companion object {
         val TAG = "ManHinhEdit"
-
     }
 
     var currentUser: User? = null
@@ -84,8 +84,6 @@ class EditProfile : AppCompatActivity() {
     }
 
     fun uploadImageToFirebase() {
-
-
         if (selectedPhotoUri != null) {
             val fileName = UUID.randomUUID().toString()
             val ref = FirebaseStorage.getInstance().getReference("/Profile_images/$fileName")
@@ -126,6 +124,9 @@ class EditProfile : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "Luu thong tin thanh cong")
+                val intent = Intent(this, ManHinhBase::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.d(TAG, "Loi khi luu thong tin")

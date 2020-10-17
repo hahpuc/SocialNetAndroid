@@ -2,16 +2,25 @@ package com.example.socialproject.ManHinhUser
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.socialproject.DangNhapDangKy.ManHinhDangNhap
 import com.example.socialproject.Model.Status
+import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.example.socialproject.VerticalSpaceItemDecoration
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -42,22 +51,34 @@ class ManHinhUser : Fragment() {
 
     }
 
-    private fun generateDummyList(size: Int): List<Status> {
+    var currentUser: User? = null
+    private fun generateDummyList(): List<Status> {
+
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("Status/$uid")
+
         val list = ArrayList<Status>()
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapShot: DataSnapshot) {
+                snapShot.children.forEach() {
+                    Log.d(TAG, "Load status ${it.toString()} ")
+                    val status = it.getValue(Status::class.java)
+                    if (status != null)
+                        list += status
+                }
 
-        for (i in 0 until size) {
-            /*val drawable = when (i % 3) {
-                0 -> R.drawable.ic_android_black_24dp
-                1 -> R.drawable.ic_baseline_account_circle_24
-                else -> R.drawable.ic_baseline_airline_seat_flat_24
-            }*/
+                list.reverse()
+            }
 
-            // Fetch Data
-            val item = Status("User name")
-            list += item
-        }
+            override fun onCancelled(snapShot: DatabaseError) {
+
+            }
+        })
+
         return list
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +88,7 @@ class ManHinhUser : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_man_hinh_user, container, false)
         val rec = view.findViewById(R.id.user_recycler_view) as RecyclerView
-        val statusList = generateDummyList(5)
+        val statusList = generateDummyList()
 
         rec.adapter = ManHinhUserAdapter(statusList)
         rec.setHasFixedSize(true)
@@ -94,6 +115,8 @@ class ManHinhUser : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
+        val TAG = "ManHinhUser"
     }
 }
 

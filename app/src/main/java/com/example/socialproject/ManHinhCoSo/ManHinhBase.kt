@@ -45,6 +45,10 @@ class ManHinhBase : AppCompatActivity() {
         tabLayout.getTabAt(1)!!.setIcon(R.drawable.unselected_chat)
         tabLayout.getTabAt(2)!!.setIcon(R.drawable.unselected_heart)
         tabLayout.getTabAt(3)!!.setIcon(R.drawable.unselected_user)
+
+        val tab = tabLayout.getTabAt(3)
+        tab!!.select()
+
     }
 
     private fun verifyUserIsLoggedIn() {

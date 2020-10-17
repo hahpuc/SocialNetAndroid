@@ -31,8 +31,6 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
         val TAG = "ManHinhUser"
 
         val CURRENT_USER = "CURRENT_USER"
-
-
     }
 
     // Tài khoản đang đăng nhập
@@ -54,8 +52,6 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
 
             else -> throw IllegalAccessException("Invalidate view type")
         }
-
-
     }
 
     override fun getItemCount(): Int {
@@ -79,20 +75,20 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
                     Picasso.get().load(currentUser?.profileImageUrl).into(holder.profileImage)
                 }
                 override fun onCancelled(error: DatabaseError) {
+
                 }
             })
 
             holder.following?.text = "100"
             holder.follower?.text = "1,093,124"
-
-
-            holder.uploadStatusButton.setOnClickListener {
-                Log.d(TAG, "Tien hanh dang status")
-            }
         }
         else
         if (holder is statusViewHolder) {
-            holder.label?.text = statusList[position - 1].getTextString()
+            //holder.label?.text = statusList[position - 1].getTextString()
+            holder.statusTextView?.text = statusList[position - 1].caption
+            Picasso.get().load(statusList[position - 1].imageUrl).into(holder.statusImage)
+
+
         }
     }
 
@@ -122,10 +118,16 @@ class userHeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             itemView.context.startActivity(intent)
         }
 
+        uploadStatusButton.setOnClickListener {
+            Log.d("ManHinhUser", "Tien hanh dang status")
+            val intent = Intent(itemView.context, ManHinhPostStatus::class.java)
+            itemView.context.startActivity(intent)
+        }
     }
+
 }
 
 class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
-    val label = itemView.findViewById(R.id.user_text_view) as? TextView
-
+    val statusImage = itemView.findViewById(R.id.status_image_view) as ImageView
+    val statusTextView = itemView.findViewById(R.id.status_status_text_view) as? TextView
 }

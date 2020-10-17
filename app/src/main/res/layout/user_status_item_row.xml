@@ -19,7 +19,7 @@
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
-        android:id="@+id/user_text_view"
+        android:id="@+id/status_user_name"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
@@ -36,15 +36,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/status_image_view"
+        android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/jisoo"
-        android:scaleType="centerCrop"
+        android:background="#000000"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/status_user_name" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -54,7 +54,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/status_image_view"
         app:srcCompat="@drawable/unselected_heart" />
 
     <TextView
@@ -67,10 +67,10 @@
         android:text="1,948 Likes"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/status_image_view" />
 
     <TextView
-        android:id="@+id/user_status_textView"
+        android:id="@+id/status_status_text_view"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -92,7 +92,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/status_image_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_delete_status"
