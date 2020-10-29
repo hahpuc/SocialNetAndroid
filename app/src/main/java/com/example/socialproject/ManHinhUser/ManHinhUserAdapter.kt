@@ -1,6 +1,5 @@
 package com.example.socialproject.ManHinhUser
 
-import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.socialproject.DangNhapDangKy.ManHinhDangNhap
-import com.example.socialproject.ManHinhUser.ManHinhUserAdapter.Companion.CURRENT_USER
 import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
@@ -22,7 +18,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 
 class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -149,5 +144,5 @@ class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
     val statusImage = itemView.findViewById(R.id.status_image_view) as? ImageView
     val statusTextView = itemView.findViewById(R.id.status_status_text_view) as? TextView
     val userAvatar = itemView.findViewById(R.id.status_profile_imageview) as? ImageView
-    val username = itemView.findViewById(R.id.status_user_name) as? TextView
+    val username = itemView.findViewById(R.id.helloworld) as? TextView
 }

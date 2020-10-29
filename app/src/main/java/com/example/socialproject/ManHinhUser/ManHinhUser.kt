@@ -78,8 +78,6 @@ class ManHinhUser : Fragment() {
         return list
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
