@@ -1,4 +1,4 @@
-package com.example.socialproject.DangNhapDangKy
+package com.example.socialproject.ViewController.DangNhapDangKy
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.socialproject.ManHinhCoSo.ManHinhBase
+import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth

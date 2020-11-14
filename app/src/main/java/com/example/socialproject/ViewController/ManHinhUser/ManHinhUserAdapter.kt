@@ -1,4 +1,4 @@
-package com.example.socialproject.ManHinhUser
+package com.example.socialproject.ViewController.ManHinhUser
 
 import android.content.Intent
 import android.util.Log

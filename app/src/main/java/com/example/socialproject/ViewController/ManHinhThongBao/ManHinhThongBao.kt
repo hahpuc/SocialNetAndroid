@@ -1,4 +1,4 @@
-package com.example.socialproject.ManHinhTinNhan
+package com.example.socialproject.ViewController.ManHinhThongBao
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ManHinhTinNhan.newInstance] factory method to
+ * Use the [ManHinhThongBao.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ManHinhTinNhan : Fragment() {
+class ManHinhThongBao : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +35,7 @@ class ManHinhTinNhan : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_man_hinh_tin_nhan, container, false)
+        return inflater.inflate(R.layout.fragment_man_hinh_thong_bao, container, false)
     }
 
     companion object {
@@ -45,12 +45,12 @@ class ManHinhTinNhan : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ManHinhTinNhan.
+         * @return A new instance of fragment ManHinhThongBao.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ManHinhTinNhan().apply {
+            ManHinhThongBao().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

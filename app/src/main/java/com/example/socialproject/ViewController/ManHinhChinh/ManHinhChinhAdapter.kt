@@ -1,9 +1,9 @@
-package com.example.socialproject.ManHinhChinh
+package com.example.socialproject.ViewController.ManHinhChinh
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.socialproject.ManHinhUser.statusViewHolder
+import com.example.socialproject.ViewController.ManHinhUser.statusViewHolder
 import com.example.socialproject.Model.Status
 import com.example.socialproject.R
 import kotlinx.android.synthetic.main.user_status_item_row.view.*

@@ -1,4 +1,4 @@
-package com.example.socialproject.ManHinhUser
+package com.example.socialproject.ViewController.ManHinhUser
 
 import android.app.Activity
 import android.content.Intent
@@ -9,19 +9,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.socialproject.DangNhapDangKy.ManHinhDangKy
-import com.example.socialproject.ManHinhCoSo.ManHinhBase
+import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.Model.Status
-import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_man_hinh_post_status.*
 import java.time.LocalDateTime
 import java.util.*

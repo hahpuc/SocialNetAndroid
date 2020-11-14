@@ -1,15 +1,15 @@
-package com.example.socialproject.ManHinhCoSo
+package com.example.socialproject.ViewController.ManHinhCoSo
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.socialproject.*
-import com.example.socialproject.DangNhapDangKy.ManHinhDangKy
-import com.example.socialproject.ManHinhChinh.ManHinhChinh
-import com.example.socialproject.ManHinhThongBao.ManHinhThongBao
-import com.example.socialproject.ManHinhTinNhan.ManHinhTinNhan
-import com.example.socialproject.ManHinhUser.ManHinhUser
+import com.example.socialproject.ViewController.DangNhapDangKy.ManHinhDangKy
+import com.example.socialproject.ViewController.ManHinhChinh.ManHinhChinh
+import com.example.socialproject.ViewController.ManHinhThongBao.ManHinhThongBao
+import com.example.socialproject.ViewController.ManHinhTinNhan.ManHinhTinNhan
+import com.example.socialproject.ViewController.ManHinhUser.ManHinhUser
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_man_hinh_base.*
 

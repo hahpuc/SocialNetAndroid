@@ -1,4 +1,4 @@
-package com.example.socialproject.ManHinhCoSo
+package com.example.socialproject.ViewController.ManHinhCoSo
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ManHinhUser.ManHinhPostStatus"></activity>
-        <activity android:name=".ManHinhUser.EditProfile" />
-        <activity android:name=".ManHinhCoSo.ManHinhBase">
+        <activity android:name="com.example.socialproject.ViewController.ManHinhUser.ManHinhPostStatus"></activity>
+        <activity android:name="com.example.socialproject.ViewController.ManHinhUser.EditProfile" />
+        <activity android:name="com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DangNhapDangKy.ManHinhDangNhap" />
-        <activity android:name=".DangNhapDangKy.ManHinhDangKy" />
+        <activity android:name="com.example.socialproject.ViewController.DangNhapDangKy.ManHinhDangNhap" />
+        <activity android:name="com.example.socialproject.ViewController.DangNhapDangKy.ManHinhDangKy" />
     </application>
 
 </manifest>

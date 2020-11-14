@@ -1,10 +1,10 @@
-package com.example.socialproject.DangNhapDangKy
+package com.example.socialproject.ViewController.DangNhapDangKy
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.socialproject.ManHinhCoSo.ManHinhBase
+import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_man_hinh_dang_nhap.*

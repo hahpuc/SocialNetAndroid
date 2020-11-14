@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#212121"
-    tools:context=".ManHinhCoSo.ManHinhBase">
+    tools:context=".ViewController.ManHinhCoSo.ManHinhBase">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
