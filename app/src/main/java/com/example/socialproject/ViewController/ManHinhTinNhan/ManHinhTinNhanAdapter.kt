@@ -1,5 +1,6 @@
 package com.example.socialproject.ViewController.ManHinhTinNhan
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.socialproject.Model.ChatMessage
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.example.socialproject.ViewController.ManHinhUser.EditProfile
 import com.example.socialproject.ViewController.ManHinhUser.ManHinhUserAdapter
 import com.example.socialproject.ViewController.ManHinhUser.statusViewHolder
 import com.example.socialproject.ViewController.ManHinhUser.userHeaderViewHolder
@@ -75,7 +77,9 @@ class searchViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
 
     init {
         searchButton.setOnClickListener {
-            Log.d("ManHinhTinNhan", "Tien hanh search account")
+//            Log.d("ManHinhTinNhan", "Tien hanh search account")
+            val intent = Intent(itemView.context, ManHinhSearchAccount::class.java)
+            itemView.context.startActivity(intent)
         }
     }
 }

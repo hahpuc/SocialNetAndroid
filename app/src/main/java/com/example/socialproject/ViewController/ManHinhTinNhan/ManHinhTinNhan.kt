@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialproject.Model.ChatMessage
-import com.example.socialproject.Model.Status
 import com.example.socialproject.R
-import com.example.socialproject.VerticalSpaceItemDecoration
-import com.example.socialproject.ViewController.ManHinhChinh.ManHinhChinhAdapter
+import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +56,11 @@ class ManHinhTinNhan : Fragment() {
 
         rec.adapter = ManHinhTinNhanAdapter(chatMessageList)
         rec.setHasFixedSize(true)
-        rec.addItemDecoration(VerticalSpaceItemDecoration(10))
+        rec.addItemDecoration(
+            VerticalSpaceItemDecoration(
+                10
+            )
+        )
 
         return view
     }

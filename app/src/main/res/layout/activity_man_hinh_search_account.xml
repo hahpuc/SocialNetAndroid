@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    tools:context=".ViewController.ManHinhTinNhan.ManHinhSearchAccount">
+
+    <Button
+        android:id="@+id/search_screen_searchbutton"
+        android:layout_width="40dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:backgroundTint="#212121
+"
+        android:drawableLeft="@drawable/ic_baseline_send_24"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/search_screen_search_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_screen_search_edittext" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoname" />
+
+    <EditText
+        android:id="@+id/search_screen_search_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:backgroundTint="#212121"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:drawablePadding="8dp"
+        android:ems="10"
+        android:hint="Search Account"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="#9e9e9e"
+        app:layout_constraintEnd_toStartOf="@+id/search_screen_searchbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_screen_recycler_view"
+        android:layout_width="409dp"
+        android:layout_height="636dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_screen_search_edittext" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

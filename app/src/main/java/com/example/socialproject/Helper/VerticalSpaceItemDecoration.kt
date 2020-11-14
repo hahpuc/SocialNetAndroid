@@ -1,4 +1,4 @@
-package com.example.socialproject
+package com.example.socialproject.Helper
 
 import android.graphics.Rect
 import android.view.View
