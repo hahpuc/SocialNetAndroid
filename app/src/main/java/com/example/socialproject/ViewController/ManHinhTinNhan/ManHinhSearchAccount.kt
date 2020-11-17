@@ -1,5 +1,6 @@
 package com.example.socialproject.ViewController.ManHinhTinNhan
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ class ManHinhSearchAccount : AppCompatActivity() {
 
     companion object {
         val TAG = "ManHinhSearch"
+        val USER_KEY = "USER_KEY"
     }
 
 
@@ -54,7 +56,17 @@ class ManHinhSearchAccount : AppCompatActivity() {
                     val searchText = search_screen_search_edittext.text
 
                     if (user != null && searchText != null && user.username.contains(searchText))
-                        adapter.add((userItem(user)))
+                        adapter.add((UserItem(user)))
+                }
+
+                adapter.setOnItemClickListener { item, view ->
+                    val userItem = item as UserItem
+
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
+
+                    Log.d(TAG, userItem.user.toString())
                 }
                 
                 search_screen_recycler_view.adapter = adapter
@@ -68,7 +80,7 @@ class ManHinhSearchAccount : AppCompatActivity() {
     }
 }
 
-class userItem(val user: User): Item<ViewHolder>() {
+class UserItem(val user: User): Item<ViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.user_info_row
     }
