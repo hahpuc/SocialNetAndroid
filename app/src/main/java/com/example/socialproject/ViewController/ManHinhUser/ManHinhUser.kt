@@ -52,7 +52,7 @@ class ManHinhUser : Fragment() {
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapShot: DataSnapshot) {
                 snapShot.children.forEach() {
-                    Log.d(TAG, "Load status ${it.toString()} ")
+                    //Log.d(TAG, "Load status ${it.toString()} ")
                     val status = it.getValue(Status::class.java)
                     if (status != null)
                         list += status

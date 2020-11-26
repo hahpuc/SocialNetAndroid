@@ -16,6 +16,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         chooseUser = intent.getParcelableExtra<User>(ManHinhSearchAccount.USER_KEY)
 
-        chatlog_textview.text = chooseUser!!.username.toString()
+        chatlog_toUser_username.text = chooseUser!!.username.toString()
     }
 }
+
