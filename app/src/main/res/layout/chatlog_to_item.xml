@@ -7,19 +7,21 @@
     android:layout_height="wrap_content"
     android:paddingBottom="8dp">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chatlog_toUser_profile_image"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
+        app:civ_border_color="#F29DBB"
+        app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/chatlog_toUser_message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,7 +31,7 @@
         android:padding="16dp"
         android:layout_marginLeft="16dp"
         android:text="Đây cũng là một tin nhắn rất dài phù hợp với mọi người xung quanh nên cố gắng mà đọc đi nhé bạn yêu"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/chatlog_toUser_profile_image"
+        app:layout_constraintTop_toTopOf="@+id/chatlog_toUser_profile_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

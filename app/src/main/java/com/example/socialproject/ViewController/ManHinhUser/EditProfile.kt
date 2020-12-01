@@ -115,7 +115,7 @@ class EditProfile : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
-        val user = User(edit_email.text.toString(), edit_user_name.text.toString(), profileImageUrl)
+        val user = User(uid.toString(), edit_email.text.toString(), edit_user_name.text.toString(), profileImageUrl)
         Log.d(TAG, "new user image link: ${user.profileImageUrl}")
 
         ref.setValue(user)

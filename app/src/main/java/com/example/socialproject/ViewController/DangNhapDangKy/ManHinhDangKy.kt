@@ -124,6 +124,7 @@ class ManHinhDangKy : AppCompatActivity() {
 
 
         var user = User(
+            uid,
             DangKy_Email_EditText.text.toString(),
             DangKy_Username_editText.text.toString(),
             profileImageUrl

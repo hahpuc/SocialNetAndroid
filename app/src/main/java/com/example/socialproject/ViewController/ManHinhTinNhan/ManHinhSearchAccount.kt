@@ -26,8 +26,6 @@ class ManHinhSearchAccount : AppCompatActivity() {
         val USER_KEY = "USER_KEY"
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_man_hinh_search_account)
@@ -50,7 +48,7 @@ class ManHinhSearchAccount : AppCompatActivity() {
 
                 // User data loop
                 p0.children.forEach() {
-                    //Log.d(TAG, it.toString())
+                    Log.d(TAG, it.toString())
                     val user = it.getValue(User::class.java)
 
                     val searchText = search_screen_search_edittext.text
@@ -66,7 +64,7 @@ class ManHinhSearchAccount : AppCompatActivity() {
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
 
-                    Log.d(TAG, userItem.user.toString())
+                    //Log.d(TAG, userItem.user.toString())
                 }
                 
                 search_screen_recycler_view.adapter = adapter
