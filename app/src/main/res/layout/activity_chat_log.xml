@@ -8,32 +8,33 @@
     tools:context=".ViewController.ManHinhTinNhan.ChatLogActivity">
 
     <ImageView
-        android:id="@+id/chatlog_toUser_profile_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/chatlog_backbutton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/chatlog_toUser_username"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:gravity="left|center"
-        android:textSize="16dp"
         android:text="Username"
         android:textColor="@android:color/white"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chatlog_toUser_profile_image"
-        app:layout_constraintTop_toTopOf="@+id/chatlog_toUser_profile_image" />
+        app:layout_constraintStart_toEndOf="@+id/chatlog_backbutton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/chatlog_edit_text"
@@ -77,7 +78,9 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/chatlog_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatlog_toUser_username" />
+        app:layout_constraintTop_toBottomOf="@+id/chatlog_toUser_username"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

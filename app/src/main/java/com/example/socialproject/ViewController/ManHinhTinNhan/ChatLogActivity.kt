@@ -38,7 +38,6 @@ class ChatLogActivity : AppCompatActivity() {
         chooseUser = intent.getParcelableExtra<User>(ManHinhSearchAccount.USER_KEY)
         chatlog_toUser_username.text = chooseUser!!.username.toString()
 
-
         listenForMessages()
 
         chatlog_recyclerview.adapter = adapter
@@ -49,7 +48,9 @@ class ChatLogActivity : AppCompatActivity() {
             performSendMessage()
         }
 
-
+        chatlog_backbutton.setOnClickListener {
+            this.finish()
+        }
     }
 
     private fun listenForMessages() {
@@ -150,6 +151,5 @@ class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
         viewHolder.itemView.chatlog_toUser_message_text.text = text
 
         Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.chatlog_toUser_profile_image)
-
     }
 }
