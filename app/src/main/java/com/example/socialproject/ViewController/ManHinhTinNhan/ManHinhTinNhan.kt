@@ -1,54 +1,72 @@
 package com.example.socialproject.ViewController.ManHinhTinNhan
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialproject.Model.ChatMessage
 import com.example.socialproject.R
 import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 import com.example.socialproject.Model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.chatlog_from_item.view.*
+import kotlinx.android.synthetic.main.lastmess_item_row.view.*
+import kotlinx.android.synthetic.main.search_item_row.*
+import kotlinx.android.synthetic.main.search_item_row.view.*
+import kotlin.coroutines.coroutineContext
+import kotlin.math.log
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ManHinhTinNhan.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ManHinhTinNhan : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    var rec: RecyclerView? = null
+    val adapter = GroupAdapter<ViewHolder>()
+
+    val latestMessageMap = HashMap<String, ChatMessage>()
+
+    private fun refreshRecycleViewMessages() {
+        adapter.clear()
+
+        latestMessageMap.values.forEach {
+            adapter.add(LatestMessageRow(it))
         }
     }
 
-    private fun generateDummyList(size: Int): List<ChatMessage> {
+    private fun listenForLatestMessages() {
+        val fromID = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("latest-messages/$fromID")
 
-        val list = ArrayList<ChatMessage>()
+        ref.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
 
-        for (i in 0 until size) {
-            val item = ChatMessage("", "" , "","", -1)
-            list += item
-        }
-        return list
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)?: return
+
+                latestMessageMap[snapshot.key!!] = chatMessage
+                refreshRecycleViewMessages()
+
+
+            }
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)?: return
+
+                latestMessageMap[snapshot.key!!] = chatMessage
+                refreshRecycleViewMessages()
+
+            }
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     override fun onCreateView(
@@ -59,29 +77,71 @@ class ManHinhTinNhan : Fragment() {
         val view = inflater.inflate(R.layout.fragment_man_hinh_tin_nhan, container, false)
 
         val rec = view.findViewById(R.id.lastmess_recycler_view) as RecyclerView
-        val chatMessageList = generateDummyList(5)
 
-        rec.adapter = ManHinhTinNhanAdapter(chatMessageList)
-        rec.setHasFixedSize(true)
-        rec.addItemDecoration(
-            VerticalSpaceItemDecoration(
-                10
-            )
-        )
+
+        // Tiến hành search Accoun
+        val button = view.findViewById(R.id.lastmess_search_bar_button) as Button
+        button.setOnClickListener {
+            Log.d("ManHinhTinNhan", "Tien hanh search account")
+
+            val intent = Intent(this.context, ManHinhSearchAccount::class.java)
+            startActivity(intent)
+        }
+
+        // Chon tin nhắn gần nhấ
+        rec.adapter = adapter
+        adapter.setOnItemClickListener{item, view ->
+            Log.d("ManHinhTinNhan", view.toString())
+
+            val intent = Intent(this.context, ChatLogActivity::class.java)
+
+            val row = item as LatestMessageRow
+            intent.putExtra(ManHinhSearchAccount.USER_KEY, row.chatPartnerUser)
+            startActivity(intent)
+        }
+
+        listenForLatestMessages()
+
 
         return view
     }
 
-    companion object {
 
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ManHinhTinNhan().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+}
+
+//--------
+class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
+
+    var chatPartnerUser: User? = null
+
+    override fun getLayout(): Int {
+        return R.layout.lastmess_item_row
+    }
+
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.lastmess_lastmess_view.text = chatMessage.text
+
+        val chatPartnerID: String
+        if (chatMessage.fromID == FirebaseAuth.getInstance().uid) {
+            chatPartnerID = chatMessage.toID
+        } else {
+            chatPartnerID = chatMessage.fromID
+        }
+
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$chatPartnerID")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                chatPartnerUser = snapshot.getValue(User::class.java)
+                viewHolder.itemView.lastmess_username.text = chatPartnerUser?.username
+
+                Picasso.get().load(chatPartnerUser?.profileImageUrl).into(viewHolder.itemView.lastmess_profile_image)
+
             }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
     }
 }

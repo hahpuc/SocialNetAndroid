@@ -109,7 +109,6 @@ class ManHinhUser : Fragment() {
                 }
             }
 
-        val TAG = "ManHinhUser"
     }
 }
 
