@@ -45,7 +45,9 @@ class ManHinhBase : AppCompatActivity() {
         adapter.addFragment(ManHinhThongBao())
         adapter.addFragment(ManHinhUser())
 
+
         viewPageContainer.adapter = adapter
+//        viewPageContainer.offscreenPageLimit = 3
         tabLayout.setupWithViewPager(viewPageContainer)
 
         tabLayout.getTabAt(0)!!.setIcon(R.drawable.unselected_home)
@@ -75,7 +77,7 @@ class ManHinhBase : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     currentUser = snapshot.getValue(User::class.java)
 
-                    Log.d("ManHinhCoSo", "Current User: ${currentUser?.username}")
+                    //Log.d("ManHinhCoSo", "Current User: ${currentUser?.username}")
                 }
 
                 override fun onCancelled(error: DatabaseError) {

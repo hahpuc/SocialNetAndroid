@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/helloworld"
+        android:id="@+id/status_user_name"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
@@ -46,7 +46,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/helloworld" />
+        app:layout_constraintTop_toBottomOf="@+id/status_user_name" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -60,7 +60,7 @@
         app:srcCompat="@drawable/unselected_heart" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/status_like_textview"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"

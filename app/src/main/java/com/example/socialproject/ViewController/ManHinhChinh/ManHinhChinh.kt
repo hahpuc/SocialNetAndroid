@@ -1,48 +1,38 @@
 package com.example.socialproject.ViewController.ManHinhChinh
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
-import com.example.socialproject.Model.Status
 import com.example.socialproject.R
 import com.example.socialproject.Helper.VerticalSpaceItemDecoration
+import com.example.socialproject.Model.Status
+import com.example.socialproject.Model.User
+import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
+import com.example.socialproject.ViewController.ManHinhTinNhan.ManHinhSearchAccount
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.user_status_item_row.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ManHinhChinh.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ManHinhChinh : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    companion object {
+        val TAG = "ManHinhHome"
     }
 
-    private fun generateDummyList(size: Int): List<Status> {
-
-        val list = ArrayList<Status>()
-
-        for (i in 0 until size) {
-            val item = Status("", "" , "","", "")
-            list += item
-        }
-        return list
-    }
+    var rec: RecyclerView? = null
+    val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,36 +40,108 @@ class ManHinhChinh : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_man_hinh_chinh, container, false)
-        val rec = view.findViewById(R.id.home_recycler_view) as RecyclerView
-        val statusList = generateDummyList(5)
+        rec = view.findViewById(R.id.home_recycler_view) as RecyclerView
 
-        rec.adapter = ManHinhChinhAdapter(statusList)
-        rec.setHasFixedSize(true)
-        rec.addItemDecoration(
+        adapter.clear()
+
+        rec!!.setHasFixedSize(true)
+        rec!!.addItemDecoration(
             VerticalSpaceItemDecoration(
                 10
             )
         )
+
+        // Tiến hành search Account
+        val button = view.findViewById(R.id.home_search_button) as Button
+        button.setOnClickListener {
+            Log.d(TAG, "Tien hanh search account")
+
+            val intent = Intent(this.context, ManHinhSearchAccount::class.java)
+            startActivity(intent)
+        }
+
+        rec!!.adapter = adapter
+
+        fetchFollowing()
+
         return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ManHinhChinh.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ManHinhChinh().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun fetchFollowing() {
+        var currentUser = ManHinhBase.currentUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("Following/$currentUser")
+
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach() {
+                    //Log.d(TAG, " Following:  ${it.key.toString()}")
+
+                    fetchStatusData(it.key.toString())
+
                 }
             }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+        })
     }
+
+    fun fetchStatusData(uid: String) {
+        val ref = FirebaseDatabase.getInstance().getReference("Status/$uid")
+
+        val userRef = FirebaseDatabase.getInstance().getReference("Users/$uid")
+
+
+        // Fetch User
+        userRef.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue(User::class.java)
+
+                // Fetch Status
+                ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val status = it.getValue(Status::class.java)
+
+                            if (status != null)
+                                adapter.add(StatusList(status, user))
+                        }
+                    }
+
+                })
+
+            }
+
+        })
+
+
+    }
+
+}
+
+class StatusList(val status: Status?, val user: User?): Item<ViewHolder>() {
+    override fun getLayout(): Int {
+        return R.layout.user_status_item_row
+    }
+
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.status_user_name.text = user?.username
+        viewHolder.itemView.status_status_text_view.text = status?.caption
+
+//        Picasso.get().load(currentUser?.profileImageUrl).into(holder.userAvatar)
+        Picasso.get().load(status?.imageUrl).into(viewHolder.itemView.status_image_view)
+
+        Picasso.get().load(user?.profileImageUrl).into(viewHolder.itemView.status_profile_imageview)
+    }
+
 }

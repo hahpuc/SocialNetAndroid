@@ -65,7 +65,7 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     currentUser = snapshot.getValue(User::class.java)
-                    Log.d(TAG, "Data current user: ${currentUser}")
+                    //Log.d(TAG, "Data current user: ${currentUser}")
 
                     holder.username?.text = currentUser?.username
                     Picasso.get().load(currentUser?.profileImageUrl).into(holder.profileImage)
@@ -144,5 +144,5 @@ class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
     val statusImage = itemView.findViewById(R.id.status_image_view) as? ImageView
     val statusTextView = itemView.findViewById(R.id.status_status_text_view) as? TextView
     val userAvatar = itemView.findViewById(R.id.status_profile_imageview) as? ImageView
-    val username = itemView.findViewById(R.id.helloworld) as? TextView
+    val username = itemView.findViewById(R.id.status_user_name) as? TextView
 }
