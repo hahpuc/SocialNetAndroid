@@ -39,7 +39,6 @@ class ManHinhUser : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     var currentUser: User? = null

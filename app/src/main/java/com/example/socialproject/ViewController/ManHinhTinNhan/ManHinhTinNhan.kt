@@ -85,6 +85,7 @@ class ManHinhTinNhan : Fragment() {
             Log.d("ManHinhTinNhan", "Tien hanh search account")
 
             val intent = Intent(this.context, ManHinhSearchAccount::class.java)
+            intent.putExtra("Caller", "SearchMessage")
             startActivity(intent)
         }
 

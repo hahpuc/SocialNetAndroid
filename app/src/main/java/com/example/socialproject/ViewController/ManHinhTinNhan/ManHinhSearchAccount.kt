@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.View
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.example.socialproject.ViewController.ManHinhChinh.ManHinhProfile
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -35,11 +36,14 @@ class ManHinhSearchAccount : AppCompatActivity() {
 
             searchUser()
         }
+
     }
 
     fun searchUser() {
 
         val ref = FirebaseDatabase.getInstance().getReference("/Users")
+
+        val caller = intent.getStringExtra("Caller")
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
 
@@ -60,9 +64,19 @@ class ManHinhSearchAccount : AppCompatActivity() {
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
 
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
-                    intent.putExtra(USER_KEY, userItem.user)
-                    startActivity(intent)
+                    if (caller == "SearchMessage") {
+                        Log.d(TAG, "Chuyen toi man hinh tin nhan")
+                        val intent = Intent(view.context, ChatLogActivity::class.java)
+                        intent.putExtra(USER_KEY, userItem.user)
+                        startActivity(intent)
+                    }
+                    else {
+                        Log.d(TAG, "Chuyen toi man hinh user")
+                        val intent = Intent(view.context, ManHinhProfile::class.java)
+                        intent.putExtra(USER_KEY, userItem.user)
+                        startActivity(intent)
+                    }
+
 
                     //Log.d(TAG, userItem.user.toString())
                 }

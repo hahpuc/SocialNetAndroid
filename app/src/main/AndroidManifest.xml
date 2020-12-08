@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewController.ManHinhTinNhan.ChatLogActivity"></activity>
+        <activity android:name=".ViewController.ManHinhChinh.ManHinhProfile"></activity>
+        <activity android:name=".ViewController.ManHinhTinNhan.ChatLogActivity" />
         <activity android:name=".ViewController.ManHinhTinNhan.ManHinhSearchAccount" />
         <activity android:name=".ViewController.ManHinhUser.ManHinhPostStatus" />
         <activity android:name=".ViewController.ManHinhUser.EditProfile" />

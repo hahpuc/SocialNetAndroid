@@ -57,6 +57,7 @@ class ManHinhChinh : Fragment() {
             Log.d(TAG, "Tien hanh search account")
 
             val intent = Intent(this.context, ManHinhSearchAccount::class.java)
+            intent.putExtra("Caller", "SearchUser")
             startActivity(intent)
         }
 
@@ -96,18 +97,14 @@ class ManHinhChinh : Fragment() {
 
         // Fetch User
         userRef.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
 
                 // Fetch Status
                 ref.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
+                    override fun onCancelled(p0: DatabaseError) {}
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach {
@@ -115,20 +112,17 @@ class ManHinhChinh : Fragment() {
 
                             if (status != null)
                                 adapter.add(StatusList(status, user))
+
+                            Log.d(TAG, "${user?.username} has ${status?.caption}")
                         }
                     }
-
                 })
-
             }
-
         })
-
-
     }
-
 }
 
+//-----------------
 class StatusList(val status: Status?, val user: User?): Item<ViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.user_status_item_row
