@@ -117,11 +117,11 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
 
 class userHeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    val following = itemView.findViewById(R.id.followingCountTextView) as? TextView
-    val follower = itemView.findViewById(R.id.followerCountTextView) as? TextView
-    val username = itemView.findViewById(R.id.user_user_name) as? TextView
-    val profileImage = itemView.findViewById(R.id.user_profile_image) as? ImageView
-    val editProfileButton = itemView.findViewById(R.id.user_edit_profile_button) as Button
+    val following = itemView.findViewById(R.id.profile_following_textview) as? TextView
+    val follower = itemView.findViewById(R.id.profile_follower_textview) as? TextView
+    val username = itemView.findViewById(R.id.profile_user_name) as? TextView
+    val profileImage = itemView.findViewById(R.id.profile_profile_image) as? ImageView
+    val editProfileButton = itemView.findViewById(R.id.profile_follow_button) as Button
     val uploadStatusButton = itemView.findViewById(R.id.user_upload_status) as Button
 
     init {

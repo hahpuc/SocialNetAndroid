@@ -1,13 +1,18 @@
 package com.example.socialproject.ViewController.ManHinhChinh
 
+import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.ViewController.ManHinhTinNhan.ManHinhSearchAccount
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,7 +23,11 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_man_hinh_profile.*
+import kotlinx.android.synthetic.main.chatlog_to_item.view.*
+import kotlinx.android.synthetic.main.profile_header.*
+import kotlinx.android.synthetic.main.profile_header.view.*
 import kotlinx.android.synthetic.main.user_info_row.view.*
+import kotlinx.android.synthetic.main.user_status_item_row.view.*
 
 class ManHinhProfile : AppCompatActivity() {
 
@@ -30,12 +39,13 @@ class ManHinhProfile : AppCompatActivity() {
 
     var adapter = GroupAdapter<ViewHolder>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_man_hinh_profile)
 
         chooseUser = intent.getParcelableExtra<User>(ManHinhSearchAccount.USER_KEY)
+
+        Log.d(TAG, "Current USER: ${ManHinhBase.currentUser!!.uid}")
 
         Log.d(TAG, "Choose USER: ${chooseUser!!.uid}")
         // Set Itemview Spacing
@@ -44,7 +54,7 @@ class ManHinhProfile : AppCompatActivity() {
             VerticalSpaceItemDecoration(10)
         )
 
-        adapter.add(HeaderItem())
+        adapter.add(HeaderItem(chooseUser!!))
 
         fetchStatus()
 
@@ -61,7 +71,7 @@ class ManHinhProfile : AppCompatActivity() {
                 snapshot.children.forEach {
                     val status = it.getValue(Status::class.java)
                     if (status != null)
-                        adapter.add(StatusItem())
+                        adapter.add(StatusItem(status, chooseUser!!))
                 }
             }
 
@@ -72,23 +82,54 @@ class ManHinhProfile : AppCompatActivity() {
     }
 
 }
-class HeaderItem(): Item<ViewHolder>() {
+
+//-----------------
+class HeaderItem(val user: User): Item<ViewHolder>() {
+
+    var isFollowing = false
+
     override fun getLayout(): Int {
-        return R.layout.user_header_profile
+        return R.layout.profile_header
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
 
+        viewHolder.itemView.profile_user_name.text = user.username
+        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.profile_profile_image)
+
+        var uid = ManHinhBase.currentUser!!.uid
+
+        var ref = FirebaseDatabase.getInstance().getReference("Following/$uid")
+
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val fl = snapshot.child(user.uid)
+
+                Log.d("ManHinhProfile", fl.toString())
+
+            }
+
+        })
+
+        Log.d("ManHinhProfile", "Is following: $isFollowing")
     }
 
 }
 
-class StatusItem(): Item<ViewHolder>() {
+class StatusItem(val status: Status, var user: User): Item<ViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.user_status_item_row
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+
+        viewHolder.itemView.status_status_text_view.text = status.caption
+        viewHolder.itemView.status_user_name.text = user.username
+        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.status_profile_imageview)
+        Picasso.get().load(status.imageUrl).into(viewHolder.itemView.status_image_view)
+
     }
 
 }
