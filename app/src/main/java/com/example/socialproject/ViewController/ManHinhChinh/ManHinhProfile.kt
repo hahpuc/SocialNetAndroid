@@ -1,6 +1,8 @@
 package com.example.socialproject.ViewController.ManHinhChinh
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +15,7 @@ import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
+import com.example.socialproject.ViewController.ManHinhTinNhan.ChatLogActivity
 import com.example.socialproject.ViewController.ManHinhTinNhan.ManHinhSearchAccount
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -107,13 +110,35 @@ class HeaderItem(val user: User): Item<ViewHolder>() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val fl = snapshot.child(user.uid)
 
-                Log.d("ManHinhProfile", fl.toString())
+                Log.d("ManHinhProfile", fl.value.toString())
+                if (fl.value.toString() != "null")
+                    isFollowing = true
 
+                Log.d("ManHinhProfile", "Is following: $isFollowing")
+
+                if (isFollowing) {
+                    viewHolder.itemView.profile_follow_button.text = "Following"
+                    viewHolder.itemView.profile_follow_button.setBackgroundResource(R.drawable.lamtron_button_black)
+                    viewHolder.itemView.profile_follow_button.setTextColor(Color.WHITE)
+                }
+                else {
+                    viewHolder.itemView.profile_follow_button.text = "Follow"
+                    viewHolder.itemView.profile_follow_button.setBackgroundResource(R.drawable.lamtron_button)
+                    viewHolder.itemView.profile_follow_button.setTextColor(Color.BLACK)
+                }
             }
 
         })
 
-        Log.d("ManHinhProfile", "Is following: $isFollowing")
+        viewHolder.itemView.profile_send_message_button.setOnClickListener {
+            Log.d("ManHinhProfile", "Tien Hanh tao MEssage")
+            val intent = Intent(it.context, ChatLogActivity::class.java)
+            intent.putExtra(ManHinhSearchAccount.USER_KEY, user)
+//            startActivity(intent)
+            it.context.startActivity(intent)
+        }
+
+
     }
 
 }
