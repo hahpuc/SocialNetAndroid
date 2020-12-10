@@ -37,9 +37,9 @@ class ManHinhProfile : AppCompatActivity() {
 
         chooseUser = intent.getParcelableExtra<User>(ManHinhSearchAccount.USER_KEY)
 
-        Log.d(TAG, "Current USER: ${ManHinhBase.currentUser!!.uid}")
+        //Log.d(TAG, "Current USER: ${ManHinhBase.currentUser!!.uid}")
 
-        Log.d(TAG, "Choose USER: ${chooseUser!!.uid}")
+        //Log.d(TAG, "Choose USER: ${chooseUser!!.uid}")
         // Set Itemview Spacing
         profile_recycler_view.setHasFixedSize(true)
         profile_recycler_view.addItemDecoration(
@@ -153,11 +153,104 @@ class HeaderItem(val user: User): Item<ViewHolder>() {
     // Tien hanh Follow User
     fun setFollow(ref: DatabaseReference) {
         ref.child(user.uid).setValue(1)
+
+
+        val uid = ManHinhBase.currentUser!!.uid
+
+        // Increase Following
+        val refFollow = FirebaseDatabase.getInstance().getReference("Users/$uid/following")
+        refFollow.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var tmp = snapshot.value
+
+                tmp = tmp.toString()
+
+                var value = tmp.toInt()
+
+                refFollow.setValue(value+1)
+
+                //Log.d("ManHinhProfile", "Following: ${snapshot.value.toString()}")
+            }
+
+        })
+
+        // Increase Follower
+        val refFollower = FirebaseDatabase.getInstance().getReference("Users/${user.uid}/follower")
+        refFollower.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var tmp2 = snapshot.value
+
+                tmp2 = tmp2.toString()
+
+                var value = tmp2.toInt()
+
+                refFollower.setValue(value+1)
+
+                //Log.d("ManHinhProfile", "Follower: ${snapshot.value.toString()}")
+            }
+
+        })
+
+
+
     }
 
     // Tien hanh Unfollow User
     fun setUnFollow(ref: DatabaseReference) {
         ref.child(user.uid).removeValue()
+
+        val uid = ManHinhBase.currentUser!!.uid
+
+        // Decrease Following
+        val refFollow = FirebaseDatabase.getInstance().getReference("Users/$uid/following")
+        refFollow.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var tmp = snapshot.value
+
+                tmp = tmp.toString()
+
+                var value = tmp.toInt()
+
+                refFollow.setValue(value - 1)
+
+                Log.d("ManHinhProfile", "Following: ${snapshot.value.toString()}")
+            }
+
+        })
+
+        // Decrease Follower
+        val refFollower = FirebaseDatabase.getInstance().getReference("Users/${user.uid}/follower")
+        refFollower.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var tmp2 = snapshot.value
+
+                tmp2 = tmp2.toString()
+
+                var value = tmp2.toInt()
+
+                refFollower.setValue(value - 1)
+
+                Log.d("ManHinhProfile", "Follower: ${snapshot.value.toString()}")
+            }
+
+        })
+
     }
 
 }
