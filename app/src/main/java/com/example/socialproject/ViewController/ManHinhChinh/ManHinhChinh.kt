@@ -113,7 +113,7 @@ class ManHinhChinh : Fragment() {
                             if (status != null)
                                 adapter.add(StatusList(status, user))
 
-                            Log.d(TAG, "${user?.username} has ${status?.caption}")
+                            //Log.d(TAG, "${user?.username} has ${status?.caption}")
                         }
                     }
                 })
