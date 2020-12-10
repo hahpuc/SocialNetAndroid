@@ -127,7 +127,7 @@ class ManHinhDangKy : AppCompatActivity() {
             uid,
             DangKy_Email_EditText.text.toString(),
             DangKy_Username_editText.text.toString(),
-            profileImageUrl
+            profileImageUrl, 1, 1
         )
         ref.setValue(user)
             .addOnSuccessListener {

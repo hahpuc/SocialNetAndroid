@@ -20,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import java.util.*
+import kotlin.collections.HashMap
 
 class EditProfile : AppCompatActivity() {
 
@@ -115,10 +116,13 @@ class EditProfile : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
-        val user = User(uid.toString(), edit_email.text.toString(), edit_user_name.text.toString(), profileImageUrl)
-        Log.d(TAG, "new user image link: ${user.profileImageUrl}")
+        val newUserName = edit_user_name.text.toString()
 
-        ref.setValue(user)
+        val value = HashMap<String, Any?>()
+        value["username"] = newUserName
+        value["profileImageUrl"] = profileImageUrl
+
+        ref.updateChildren(value)
             .addOnSuccessListener {
                 Log.d(TAG, "Luu thong tin thanh cong")
                 val intent = Intent(this, ManHinhBase::class.java)
@@ -128,6 +132,24 @@ class EditProfile : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d(TAG, "Loi khi luu thong tin")
             }
+
+
+////        Log.d(TAG, "new user image link: ${user.profileImageUrl}")
+////
+//        ref.setValue(user)
+//            .addOnSuccessListener {
+//                Log.d(TAG, "Luu thong tin thanh cong")
+//                val intent = Intent(this, ManHinhBase::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
+//            }
+//            .addOnFailureListener {
+//                Log.d(TAG, "Loi khi luu thong tin")
+//            }
+//
+//        ref.update({})
+
+
     }
 
 

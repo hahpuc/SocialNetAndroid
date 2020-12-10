@@ -69,14 +69,17 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
 
                     holder.username?.text = currentUser?.username
                     Picasso.get().load(currentUser?.profileImageUrl).into(holder.profileImage)
+
+                    holder.following?.text = currentUser?.following.toString()
+                    holder.follower?.text = currentUser?.follower.toString()
                 }
                 override fun onCancelled(error: DatabaseError) {
 
                 }
             })
 
-            holder.following?.text = "100"
-            holder.follower?.text = "1,093,124"
+//            holder.following?.text = "100"
+//            holder.follower?.text = "1,093,124"
         }
         else
         if (holder is statusViewHolder) {

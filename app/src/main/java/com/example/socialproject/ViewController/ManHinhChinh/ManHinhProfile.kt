@@ -88,6 +88,8 @@ class HeaderItem(val user: User): Item<ViewHolder>() {
 
         viewHolder.itemView.profile_user_name.text = user.username
         Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.profile_profile_image)
+        viewHolder.itemView.profile_following_textview.text = user.following.toString()
+        viewHolder.itemView.profile_follower_textview.text = user.follower.toString()
 
         var uid = ManHinhBase.currentUser!!.uid
 
