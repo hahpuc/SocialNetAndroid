@@ -1,5 +1,6 @@
 package com.example.socialproject.ViewController.ManHinhUser
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.user_status_item_row.view.*
 
 class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -153,4 +155,18 @@ class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
     val username = itemView.findViewById(R.id.status_user_name) as? TextView
 
     val statusLike = itemView.findViewById(R.id.status_like_textview) as? TextView
+
+    val likeButton = itemView.findViewById(R.id.status_like_button) as ImageView
+
+    init {
+        likeButton.setOnClickListener {
+            Log.d("ManHinhUser", "Tien hanh like status")
+
+            //viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.selected_heart)
+
+            likeButton.setBackgroundResource(R.drawable.selected_heart)
+        }
+    }
+
+
 }

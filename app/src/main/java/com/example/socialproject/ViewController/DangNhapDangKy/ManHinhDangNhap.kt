@@ -22,6 +22,7 @@ class ManHinhDangNhap : AppCompatActivity() {
 
         DangNhap_Button.setOnClickListener {
             Log.d(TAG, "Tiến hành đăng nhập")
+            DangNhap_ProgessBar.alpha = 1f
             tienHanhDangNhap()
 
         }
@@ -49,6 +50,7 @@ class ManHinhDangNhap : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Log.d(TAG, "Đăng nhập không thành công")
+                DangNhap_ProgessBar.alpha = 0f
             }
     }
 }
