@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.View
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.example.socialproject.View.UserView.UserItem
 import com.example.socialproject.ViewController.ManHinhChinh.ManHinhProfile
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -92,15 +93,3 @@ class ManHinhSearchAccount : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.user_info_row
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.user_item_username.text = user.username
-
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.user_item_profile_image)
-    }
-
-}

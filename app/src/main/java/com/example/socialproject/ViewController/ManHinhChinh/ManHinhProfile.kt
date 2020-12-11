@@ -9,6 +9,7 @@ import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.example.socialproject.View.StatusView.StatusItem
 import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
 import com.example.socialproject.ViewController.ManHinhTinNhan.ChatLogActivity
 import com.example.socialproject.ViewController.ManHinhTinNhan.ManHinhSearchAccount
@@ -19,7 +20,6 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_man_hinh_profile.*
 import kotlinx.android.synthetic.main.profile_header.view.*
-import kotlinx.android.synthetic.main.user_status_item_row.view.*
 
 class ManHinhProfile : AppCompatActivity() {
 
@@ -63,7 +63,12 @@ class ManHinhProfile : AppCompatActivity() {
                 snapshot.children.forEach {
                     val status = it.getValue(Status::class.java)
                     if (status != null)
-                        adapter.add(StatusItem(status, chooseUser!!))
+                        adapter.add(
+                            StatusItem(
+                                status,
+                                chooseUser!!
+                            )
+                        )
                 }
             }
 
@@ -252,22 +257,6 @@ class HeaderItem(val user: User): Item<ViewHolder>() {
             }
 
         })
-
-    }
-
-}
-
-class StatusItem(val status: Status, var user: User): Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.user_status_item_row
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-
-        viewHolder.itemView.status_status_text_view.text = status.caption
-        viewHolder.itemView.status_user_name.text = user.username
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.status_profile_imageview)
-        Picasso.get().load(status.imageUrl).into(viewHolder.itemView.status_image_view)
 
     }
 

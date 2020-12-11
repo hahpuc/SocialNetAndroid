@@ -13,6 +13,7 @@ import com.example.socialproject.Model.ChatMessage
 import com.example.socialproject.R
 import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 import com.example.socialproject.Model.User
+import com.example.socialproject.View.ManHinhTinNhan.LatestMessageRow
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -112,37 +113,3 @@ class ManHinhTinNhan : Fragment() {
 }
 
 //--------
-class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
-
-    var chatPartnerUser: User? = null
-
-    override fun getLayout(): Int {
-        return R.layout.lastmess_item_row
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.lastmess_lastmess_view.text = chatMessage.text
-
-        val chatPartnerID: String
-        if (chatMessage.fromID == FirebaseAuth.getInstance().uid) {
-            chatPartnerID = chatMessage.toID
-        } else {
-            chatPartnerID = chatMessage.fromID
-        }
-
-        val ref = FirebaseDatabase.getInstance().getReference("/Users/$chatPartnerID")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                chatPartnerUser = snapshot.getValue(User::class.java)
-                viewHolder.itemView.lastmess_username.text = chatPartnerUser?.username
-
-                Picasso.get().load(chatPartnerUser?.profileImageUrl).into(viewHolder.itemView.lastmess_profile_image)
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
-
-    }
-}
