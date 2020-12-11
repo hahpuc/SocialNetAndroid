@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/status_user_name" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/status_like_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -66,9 +66,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="1,948 Likes"
+        android:text="likes"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/status_like_button"
         app:layout_constraintTop_toBottomOf="@+id/status_image_view" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/status_like_button" />
 
     <ImageView
         android:id="@+id/user_delete_status"

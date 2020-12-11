@@ -103,7 +103,10 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
             })
 
             holder.statusTextView?.text = statusList[position - 1].caption
+            holder.statusLike?.text = statusList[position - 1].like.toString()
             Picasso.get().load(statusList[position - 1].imageUrl).into(holder.statusImage)
+
+
 
         }
     }
@@ -148,4 +151,6 @@ class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
     val statusTextView = itemView.findViewById(R.id.status_status_text_view) as? TextView
     val userAvatar = itemView.findViewById(R.id.status_profile_imageview) as? ImageView
     val username = itemView.findViewById(R.id.status_user_name) as? TextView
+
+    val statusLike = itemView.findViewById(R.id.status_like_textview) as? TextView
 }

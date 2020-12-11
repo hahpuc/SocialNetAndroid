@@ -107,11 +107,14 @@ class ManHinhChinh : Fragment() {
                     override fun onCancelled(p0: DatabaseError) {}
 
                     override fun onDataChange(snapshot: DataSnapshot) {
+
                         snapshot.children.forEach {
                             val status = it.getValue(Status::class.java)
 
+//                            Log.d(TAG, it.key.toString())
+
                             if (status != null)
-                                adapter.add(StatusList(status, user))
+                                adapter.add(StatusList(status, user, it.key.toString()))
 
                             //Log.d(TAG, "${user?.username} has ${status?.caption}")
                         }
@@ -123,7 +126,7 @@ class ManHinhChinh : Fragment() {
 }
 
 //-----------------
-class StatusList(val status: Status?, val user: User?): Item<ViewHolder>() {
+class StatusList(val status: Status?, val user: User?, val keyStatus: String): Item<ViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.user_status_item_row
     }
@@ -136,6 +139,17 @@ class StatusList(val status: Status?, val user: User?): Item<ViewHolder>() {
         Picasso.get().load(status?.imageUrl).into(viewHolder.itemView.status_image_view)
 
         Picasso.get().load(user?.profileImageUrl).into(viewHolder.itemView.status_profile_imageview)
+
+        // Fetch Status Like
+        viewHolder.itemView.status_like_textview.text = status?.like.toString()
+
+
+        // Tien hanh Like status
+        viewHolder.itemView.status_like_button.setOnClickListener {
+            Log.d("ManHinhHome", "Tien hanh like status ${status?.caption}")
+
+            viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.selected_heart)
+        }
     }
 
 }

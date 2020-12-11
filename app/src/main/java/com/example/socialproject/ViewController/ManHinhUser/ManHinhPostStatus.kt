@@ -81,7 +81,7 @@ class ManHinhPostStatus : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("Status/$userID").push()
         val currentDateTime = LocalDateTime.now().toString()
 
-        val statusPost = Status(ref.key!!, userID.toString(), statusImageUrl, post_edit_text.text.toString(), currentDateTime)
+        val statusPost = Status(ref.key!!, userID.toString(), statusImageUrl, post_edit_text.text.toString(), currentDateTime, 0)
         ref.setValue(statusPost)
             .addOnSuccessListener {
                 Log.d(TAG, "Đăng status thành công")
