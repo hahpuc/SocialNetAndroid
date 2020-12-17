@@ -9,7 +9,7 @@
 ## Screenshots 
 
 <div>
-  <img src = "images/overview.png" width = 800 />
+  <img src = "images/overview1.png" width = 800 />
   <img src = "images/login.png" width = 200 />
   <img src = "images/register.png" width = 200 />
   <img src = "images/profile.png" width = 200 /> 
