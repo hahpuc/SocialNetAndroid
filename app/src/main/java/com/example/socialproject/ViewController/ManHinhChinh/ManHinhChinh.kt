@@ -70,9 +70,9 @@ class ManHinhChinh : Fragment() {
         var currentUser = ManHinhBase.currentUser?.uid
         val ref = FirebaseDatabase.getInstance().getReference("Following/$currentUser")
 
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach() {
+                snapshot.children.forEach {
                     //Log.d(TAG, " Following:  ${it.key.toString()}")
 
                     fetchStatusData(it.key.toString())
@@ -94,7 +94,7 @@ class ManHinhChinh : Fragment() {
 
 
         // Fetch User
-        userRef.addListenerForSingleValueEvent(object: ValueEventListener {
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -112,12 +112,7 @@ class ManHinhChinh : Fragment() {
 //                            Log.d(TAG, it.key.toString())
 
                             if (status != null)
-                                adapter.add(
-                                    StatusItem(
-                                        status,
-                                        user
-                                    )
-                                )
+                                adapter.add(StatusItem(status, user))
 
                             //Log.d(TAG, "${user?.username} has ${status?.caption}")
                         }
