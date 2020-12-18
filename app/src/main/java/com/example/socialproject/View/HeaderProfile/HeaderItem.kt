@@ -1,4 +1,4 @@
-package com.example.socialproject.View.UserProfileView
+package com.example.socialproject.View.HeaderProfile
 
 import android.content.Intent
 import android.graphics.Color

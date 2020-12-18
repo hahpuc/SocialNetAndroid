@@ -1,4 +1,4 @@
-package com.example.socialproject.View.UserView
+package com.example.socialproject.View.UserSearchView
 
 import com.example.socialproject.Model.User
 import com.example.socialproject.R

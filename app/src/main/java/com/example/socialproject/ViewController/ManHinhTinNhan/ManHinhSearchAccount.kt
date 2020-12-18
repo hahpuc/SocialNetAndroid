@@ -4,22 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.View
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
-import com.example.socialproject.View.UserView.UserItem
+import com.example.socialproject.View.UserSearchView.UserItem
 import com.example.socialproject.ViewController.ManHinhChinh.ManHinhProfile
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_man_hinh_search_account.*
-import kotlinx.android.synthetic.main.user_info_row.view.*
 
 class ManHinhSearchAccount : AppCompatActivity() {
 

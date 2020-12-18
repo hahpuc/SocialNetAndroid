@@ -1,26 +1,18 @@
 package com.example.socialproject.ViewController.ManHinhChinh
 
-import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.example.socialproject.View.StatusView.StatusItem
-import com.example.socialproject.View.UserProfileView.HeaderItem
-import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
-import com.example.socialproject.ViewController.ManHinhTinNhan.ChatLogActivity
+import com.example.socialproject.View.HeaderProfile.HeaderItem
 import com.example.socialproject.ViewController.ManHinhTinNhan.ManHinhSearchAccount
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_man_hinh_profile.*
-import kotlinx.android.synthetic.main.profile_header.view.*
 
 class ManHinhProfile : AppCompatActivity() {
 
@@ -81,4 +73,3 @@ class ManHinhProfile : AppCompatActivity() {
 
 }
 
-//-----------------

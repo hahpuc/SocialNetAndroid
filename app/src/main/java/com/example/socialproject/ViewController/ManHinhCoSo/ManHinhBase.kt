@@ -45,7 +45,6 @@ class ManHinhBase : AppCompatActivity() {
         adapter.addFragment(ManHinhThongBao())
         adapter.addFragment(ManHinhUser())
 
-
         viewPageContainer.adapter = adapter
 //        viewPageContainer.offscreenPageLimit = 3
         tabLayout.setupWithViewPager(viewPageContainer)
