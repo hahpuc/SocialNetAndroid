@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.socialproject.Model.Like
 import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
@@ -108,7 +109,94 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
             holder.statusLike?.text = statusList[position - 1].like.toString()
             Picasso.get().load(statusList[position - 1].imageUrl).into(holder.statusImage)
 
+            var isLike = false
+            var currentStatusLike = statusList[position - 1].like
 
+            // Fetch Current Login User Like to Status in HeartIcon
+            val likeFromToRef = FirebaseDatabase.getInstance().getReference("Like/${uid}/${uid}")
+
+            likeFromToRef.addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var child = snapshot.child(statusList[position - 1].id)
+                    if (child.value.toString() != "null") {
+                        holder.likeButton.setBackgroundResource(R.drawable.selected_heart)
+                        isLike = true
+                    }
+
+                    // Like Button Handle
+                    holder.likeButton.setOnClickListener {
+                        Log.d(TAG, isLike.toString())
+                        if (!isLike) {
+                            isLike = true
+                            Log.d(TAG, "Tien hanh like status ${statusList[position - 1].id} của ${uid}")
+
+                            val ref = FirebaseDatabase.getInstance().getReference("Like/${uid}/${uid}/${statusList[position - 1].id}")
+
+                            val likeStatus = Like(uid.toString(), uid.toString(), statusList[position - 1].id)
+
+                            ref.setValue(likeStatus)
+
+                            // Increase Like Count in Firebase
+                            val likeRef = FirebaseDatabase.getInstance().getReference("Status/${uid}/${statusList[position - 1].id}/like")
+
+                            likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {
+
+                                }
+
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    val tmp = p0.value.toString()
+
+                                    var value = tmp.toInt()
+
+                                    likeRef.setValue(value + 1)
+                                }
+
+                            })
+
+                            currentStatusLike += 1
+                            holder.statusLike?.text = currentStatusLike.toString()
+                            holder.likeButton.setBackgroundResource(R.drawable.selected_heart)
+                        }
+                        else {
+                            isLike = false
+                            Log.d("ManHinhHome", "Tien hanh HUY like status ${statusList[position - 1].id} của ${uid}")
+
+                            val ref = FirebaseDatabase.getInstance().getReference("Like/${currentUser!!.uid}/${uid}/${statusList[position - 1].id}")
+
+                            ref.removeValue()
+
+
+                            // Decrease Like Count in Firebase
+                            val likeRef = FirebaseDatabase.getInstance().getReference("Status/${uid}/${statusList[position - 1].id}/like")
+
+                            likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {
+
+                                }
+
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    val tmp = p0.value.toString()
+
+                                    var value = tmp.toInt()
+
+                                    likeRef.setValue(value - 1)
+                                }
+
+                            })
+
+                            currentStatusLike -= 1
+                            holder.statusLike?.text = currentStatusLike.toString()
+                            holder.likeButton.setBackgroundResource(R.drawable.unselected_heart)
+
+                        }
+
+                    }
+                }
+
+            })
 
         }
     }
@@ -123,6 +211,7 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
 
 }
 
+//-----------------------------------
 class userHeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     val following = itemView.findViewById(R.id.profile_following_textview) as? TextView
@@ -158,15 +247,15 @@ class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
 
     val likeButton = itemView.findViewById(R.id.status_like_button) as ImageView
 
-    init {
-        likeButton.setOnClickListener {
-            Log.d("ManHinhUser", "Tien hanh like status")
-
-            //viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.selected_heart)
-
-            likeButton.setBackgroundResource(R.drawable.selected_heart)
-        }
-    }
+//    init {
+//        likeButton.setOnClickListener {
+//            Log.d("ManHinhUser", "Tien hanh like status")
+//
+//            //viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.selected_heart)
+//
+//            likeButton.setBackgroundResource(R.drawable.selected_heart)
+//        }
+//    }
 
 
 }
