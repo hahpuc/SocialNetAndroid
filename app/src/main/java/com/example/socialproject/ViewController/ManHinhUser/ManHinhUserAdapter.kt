@@ -247,15 +247,4 @@ class statusViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
 
     val likeButton = itemView.findViewById(R.id.status_like_button) as ImageView
 
-//    init {
-//        likeButton.setOnClickListener {
-//            Log.d("ManHinhUser", "Tien hanh like status")
-//
-//            //viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.selected_heart)
-//
-//            likeButton.setBackgroundResource(R.drawable.selected_heart)
-//        }
-//    }
-
-
 }

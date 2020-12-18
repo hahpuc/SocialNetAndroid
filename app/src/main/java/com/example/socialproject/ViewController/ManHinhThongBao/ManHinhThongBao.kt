@@ -5,56 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.socialproject.Helper.VerticalSpaceItemDecoration
+import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ManHinhThongBao.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ManHinhThongBao : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var rec: RecyclerView? = null
+    val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_man_hinh_thong_bao, container, false)
+        val view =  inflater.inflate(R.layout.fragment_man_hinh_thong_bao, container, false)
+
+        rec = view.findViewById(R.id.notifi_recycler_view) as RecyclerView
+
+        adapter.clear()
+
+        adapter.add(NotificationItem())
+        adapter.add(NotificationItem())
+        adapter.add(NotificationItem())
+        adapter.add(NotificationItem())
+
+        rec!!.setHasFixedSize(true)
+        rec!!.addItemDecoration(
+            VerticalSpaceItemDecoration(
+                10
+            )
+        )
+
+        rec?.adapter = adapter
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ManHinhThongBao.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ManHinhThongBao().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+}
+
+//-----------
+class NotificationItem(): Item<ViewHolder>() {
+    override fun getLayout(): Int {
+        return R.layout.notifi_item_row
     }
+
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+
+    }
+
 }

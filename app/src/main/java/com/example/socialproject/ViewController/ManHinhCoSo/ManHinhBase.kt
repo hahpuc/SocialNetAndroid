@@ -37,6 +37,7 @@ class ManHinhBase : AppCompatActivity() {
     }
 
     private fun setUpViewPage() {
+
         val adapter = PageAdapter(
             supportFragmentManager
         )
@@ -44,6 +45,8 @@ class ManHinhBase : AppCompatActivity() {
         adapter.addFragment(ManHinhTinNhan())
         adapter.addFragment(ManHinhThongBao())
         adapter.addFragment(ManHinhUser())
+
+        adapter.notifyDataSetChanged()
 
         viewPageContainer.adapter = adapter
 //        viewPageContainer.offscreenPageLimit = 3
