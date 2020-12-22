@@ -1,5 +1,5 @@
 ## Technologies 
-- Android Studio 4.0.1
+- Android Studio 4.1.1
 - Kotlin 1.3.72
 - Firebase 
 - [Circle ImageView](https://github.com/hdodenhof/CircleImageView)
