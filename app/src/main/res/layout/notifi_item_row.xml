@@ -5,17 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#000000"
     android:paddingBottom="8dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/notifi_profile_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        app:civ_border_color="#F29DBB"
-        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_on" />
@@ -32,30 +31,17 @@
         app:srcCompat="@drawable/jisoo" />
 
     <TextView
-        android:id="@+id/notifi_user_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/notifi_text_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:text="user name"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/notifi_profile_image"
-        app:layout_constraintTop_toTopOf="@+id/notifi_profile_image" />
-
-    <TextView
-        android:id="@+id/notifi_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:text="start follow you"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="TextView"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/notifi_status_image"
-        app:layout_constraintStart_toEndOf="@+id/notifi_user_name"
-        app:layout_constraintTop_toTopOf="@+id/notifi_user_name" />
-
+        app:layout_constraintStart_toEndOf="@+id/notifi_profile_image"
+        app:layout_constraintTop_toTopOf="@+id/notifi_profile_image" />
 </androidx.constraintlayout.widget.ConstraintLayout>
