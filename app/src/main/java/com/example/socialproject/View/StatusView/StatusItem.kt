@@ -2,10 +2,12 @@ package com.example.socialproject.View.StatusView
 
 import android.util.Log
 import com.example.socialproject.Model.Like
+import com.example.socialproject.Model.Notification
 import com.example.socialproject.Model.Status
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
 import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
+import com.example.socialproject.ViewController.ManHinhTinNhan.ChatLogActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -37,7 +39,7 @@ class StatusItem(val status: Status, var user: User?): Item<ViewHolder>() {
         Picasso.get().load(status.imageUrl).into(viewHolder.itemView.status_image_view)
         Picasso.get().load(user?.profileImageUrl).into(viewHolder.itemView.status_profile_imageview)
 
-        // Fetch Status Like Viewfalse
+        // Fetch Status Like View
         viewHolder.itemView.status_like_textview.text = status.like.toString()
 
         // Fetch Current Login User Like to Status in HeartIcon
@@ -55,7 +57,8 @@ class StatusItem(val status: Status, var user: User?): Item<ViewHolder>() {
 
                 // Like Button Handle
                 viewHolder.itemView.status_like_button.setOnClickListener {
-                    Log.d("ManHinhHome", isLike.toString())
+
+                    // If isn't like, set up this
                     if (!isLike) {
                         isLike = true
                         Log.d("ManHinhHome", "Tien hanh like status ${status.id} của ${user?.username}")
@@ -87,6 +90,20 @@ class StatusItem(val status: Status, var user: User?): Item<ViewHolder>() {
                         currentStatusLike += 1
                         viewHolder.itemView.status_like_textview.text = currentStatusLike.toString()
                         viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.selected_heart)
+
+                        // Set up Notification
+                        if (currentUser!!.uid != user!!.uid) {
+                            val notiRef = FirebaseDatabase.getInstance().getReference("Notification/${user!!.uid}").push()
+
+
+                            val content = "liked your status"
+                            val notification = Notification(notiRef.key!!, content, status.imageUrl, currentUser,
+                                user!!,System.currentTimeMillis()/1000)
+
+                            notiRef.setValue(notification).addOnSuccessListener {
+                                Log.d("ManHinhThongBao", "Save notification: ${notiRef.key}")
+                            }
+                        }
 
                     }
                     else {
@@ -121,6 +138,9 @@ class StatusItem(val status: Status, var user: User?): Item<ViewHolder>() {
                         viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.unselected_heart)
 
                     }
+
+
+
 
                 }
             }
