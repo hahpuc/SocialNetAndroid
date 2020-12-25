@@ -73,6 +73,16 @@ class HeaderItem(val user: User): Item<ViewHolder>() {
                 viewHolder.itemView.profile_follow_button.text = "Follow"
                 viewHolder.itemView.profile_follow_button.setBackgroundResource(R.drawable.lamtron_button)
                 viewHolder.itemView.profile_follow_button.setTextColor(Color.BLACK)
+
+                val follower = viewHolder.itemView.profile_follower_textview.text.toString()
+
+                var inFollower = 0
+                if (follower != "0") {
+                    inFollower = follower.toInt() - 1
+                }
+
+                viewHolder.itemView.profile_follower_textview.text = inFollower.toString()
+
                 isFollowing = false
 
                 setUnFollow(ref)
@@ -81,6 +91,12 @@ class HeaderItem(val user: User): Item<ViewHolder>() {
                 viewHolder.itemView.profile_follow_button.text = "Following"
                 viewHolder.itemView.profile_follow_button.setBackgroundResource(R.drawable.lamtron_button_black)
                 viewHolder.itemView.profile_follow_button.setTextColor(Color.WHITE)
+
+                val follower = viewHolder.itemView.profile_follower_textview.text.toString()
+                val inFollower = follower.toInt() + 1
+
+                viewHolder.itemView.profile_follower_textview.text = inFollower.toString()
+
                 isFollowing = true
 
                 setFollow(ref)

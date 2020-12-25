@@ -13,6 +13,7 @@ import com.example.socialproject.Helper.VerticalSpaceItemDecoration
 import com.example.socialproject.Model.Notification
 import com.example.socialproject.Model.User
 import com.example.socialproject.R
+import com.example.socialproject.View.NotificationView.NotificationItem
 import com.example.socialproject.ViewController.ManHinhCoSo.ManHinhBase
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -65,8 +66,6 @@ class ManHinhThongBao : Fragment() {
         })
 
 
-        Log.d(TAG, "ManHinhThongBao")
-
         rec.setHasFixedSize(true)
         rec.addItemDecoration(
             VerticalSpaceItemDecoration(
@@ -80,27 +79,5 @@ class ManHinhThongBao : Fragment() {
     }
 
 
-
-}
-
-//-----------
-class NotificationItem(val notiItem: Notification): Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.notifi_item_row
-    }
-
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-
-        viewHolder.itemView.notifi_user_name.text = notiItem.fromUser.username
-        viewHolder.itemView.notifi_content.text = notiItem.content
-
-        if (notiItem.image == null)
-            viewHolder.itemView.notifi_status_image.imageAlpha = 0
-        else
-            Picasso.get().load(notiItem.image).into(viewHolder.itemView.notifi_status_image)
-
-        Picasso.get().load(notiItem.fromUser.profileImageUrl).into(viewHolder.itemView.notifi_profile_image)
-    }
 
 }

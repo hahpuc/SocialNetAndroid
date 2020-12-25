@@ -64,6 +64,8 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
             val uid = FirebaseAuth.getInstance().uid
             val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
 
+
+
             ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -81,8 +83,6 @@ class ManHinhUserAdapter(private val statusList: List<Status>): RecyclerView.Ada
                 }
             })
 
-//            holder.following?.text = "100"
-//            holder.follower?.text = "1,093,124"
         }
         else
         if (holder is statusViewHolder) {
