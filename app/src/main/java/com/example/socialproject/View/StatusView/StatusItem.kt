@@ -33,6 +33,7 @@ class StatusItem(val status: Status, var user: User?): Item<ViewHolder>() {
 
         currentStatusLike = status.like
 
+        viewHolder.itemView.status_delete_button.alpha = 0f
         viewHolder.itemView.status_user_name.text = user?.username
         viewHolder.itemView.status_status_text_view.text = status.caption
 
@@ -136,6 +137,35 @@ class StatusItem(val status: Status, var user: User?): Item<ViewHolder>() {
                         currentStatusLike -= 1
                         viewHolder.itemView.status_like_textview.text = currentStatusLike.toString()
                         viewHolder.itemView.status_like_button.setBackgroundResource(R.drawable.unselected_heart)
+
+                        // Delete Notification
+                        if (currentUser!!.uid != user!!.uid) {
+                            val notiRef = FirebaseDatabase.getInstance().getReference("Notification/${user!!.uid}")
+
+                            notiRef.addListenerForSingleValueEvent(object: ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {
+
+                                }
+
+                                override fun onDataChange(p0: DataSnapshot) {
+                                    p0.children.forEach() {
+                                        //Log.d("Notification", it.child("image").value.toString())
+
+                                        if (it.child("image").value.toString() == status.imageUrl)
+                                            notiRef.child(it.key.toString()).removeValue()
+                                    }
+                                }
+
+                            })
+
+//                            val content = "liked your status"
+//                            val notification = Notification(notiRef.key!!, content, status.imageUrl, currentUser,
+//                                user!!,System.currentTimeMillis()/1000)
+//
+//                            notiRef.setValue(notification).addOnSuccessListener {
+//                                Log.d("ManHinhThongBao", "Save notification: ${notiRef.key}")
+//                            }
+                        }
 
                     }
 

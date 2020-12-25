@@ -54,7 +54,7 @@ class ManHinhThongBao : Fragment() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                p0.children.forEach {
+                p0.children.reversed().forEach {
                     val value = it.getValue(Notification::class.java)
 
                     if (value != null)
