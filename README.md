@@ -13,6 +13,9 @@
   <img src = "images/login.png" width = 200 />
   <img src = "images/register.png" width = 200 />
   <img src = "images/profile.png" width = 200 /> 
+    <img src = "images/followscreen.png" width = 200 />
   <img src = "images/lastmessage.png" width = 200 /> 
   <img src = "images/chatlog.png" width = 200 />
+  <img src = "images/notification.png" width = 200 />
+  <img src = "images/editprofile.png" width = 200 />
 </div>
