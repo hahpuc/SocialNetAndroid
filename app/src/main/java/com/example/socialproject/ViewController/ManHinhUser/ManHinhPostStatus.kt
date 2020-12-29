@@ -86,10 +86,10 @@ class ManHinhPostStatus : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(TAG, "Đăng status thành công")
 
-//                val intent = Intent(this, ManHinhBase::class.java)
-//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                startActivity(intent)
-                finish()
+                val intent = Intent(this, ManHinhBase::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+//                finish()
             }
             .addOnFailureListener {
                 Log.d(TAG, "Xảy ra lỗi khi đăng status")
